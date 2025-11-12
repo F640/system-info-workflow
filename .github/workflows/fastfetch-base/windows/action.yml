@@ -36,12 +36,9 @@ runs:
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          echo ${{ runner.temp }}
-          echo %temp%
-          echo %DOWNLOAD_FILENAME%
-          cd ${{ runner.temp }}\fastfetch
-          7z.exe -o%GITHUB_WORKSPACE%\fastfetch x %DOWNLOAD_FILENAME%
+          cd %temp%\fastfetch
+          7z.exe -o%GITHUB_WORKSPACE%\fastfetch x ${{ env.DOWNLOAD_FILENAME }}
 
     - name: Remove unused files
       shell: cmd
-      run: rmdir /S /Q ${{ runner.temp }}\fastfetch
+      run: rmdir /S /Q %temp%\fastfetch
