@@ -33,14 +33,12 @@ runs:
         zipBall: false
         out-file-path: '/tmp/fastfetch'
 
-    # Step 3: Install the downloaded .deb package
     - name: Install Fastfetch
       shell: bash
       env:
         DEBIAN_FRONTEND: noninteractive
       run: sudo dpkg -i /tmp/fastfetch/${{ env.DOWNLOAD_FILENAME }}
 
-    # Step 4: Clean up the downloaded files
     - name: Remove unused files
       shell: bash
       run: rm -rf /tmp/fastfetch

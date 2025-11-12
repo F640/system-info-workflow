@@ -1,0 +1,49 @@
+name: 'Setup Fastfetch MacOS'
+
+inputs:
+  use-prerelease:
+    description: 'Use pre-release'
+    default: false
+    type: boolean
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set correct fastfetch package name arch
+      shell: bash
+      run: |
+        ARCH=$(uname -m)
+        if [ "$ARCH" = "x86_64" ]; then
+          echo "DOWNLOAD_FILENAME=fastfetch-macos-amd64.tar.gz" >> $GITHUB_ENV
+          echo "FOLDER_NAME=fastfetch-macos-amd64" >> $GITHUB_ENV
+        elif [ "$ARCH" = "arm64" ]; then
+          echo "DOWNLOAD_FILENAME=fastfetch-macos-aarch64.tar.gz" >> $GITHUB_ENV
+          echo "FOLDER_NAME=fastfetch-macos-aarch64" >> $GITHUB_ENV
+        else
+          echo "Unknown CPU architecture: $ARCH"
+          exit 1
+        fi
+
+  - uses: robinraju/release-downloader@v1
+    with:
+      repository: 'fastfetch-cli/fastfetch'
+      latest: true
+      preRelease: ${{ github.event.inputs.use-prerelease }}
+      fileName: ${{ env.DOWNLOAD_FILENAME }}
+      tarBall: false
+      zipBall: false
+      out-file-path: '/tmp/fastfetch'
+
+  - name: Extract Fastfetch
+    shell: bash
+    run: |
+        cd /tmp/fastfetch
+        sudo tar -xzvf ${{ env.DOWNLOAD_FILENAME }}
+
+        cd ${{ env.FOLDER_NAME }}
+        sudo chmod -R 555 usr
+        sudo cp -r usr/bin/* /usr/local/bin/
+        sudo cp -r usr/share/* /usr/local/share/
+  - name: Remove unused files
+    shell: bash
+    run: sudo rm -rf /tmp/fastfetch
