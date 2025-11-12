@@ -37,7 +37,7 @@ runs:
         fileName: ${{ env.DOWNLOAD_FILENAME }}
         tarBall: false
         zipBall: false
-        out-file-path: '$env:TEMP\fastfetch'
+        out-file-path: '$TEMP\fastfetch'
 
     - name: Extract Fastfetch
       shell: cmd
