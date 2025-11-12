@@ -23,7 +23,7 @@ jobs:
       - name: Run Fastfetch
         run: fastfetch -c all
       - name: Run Inxi (as root)
-        # if running old ubuntu consider sudo inxi -c 0 -FxxxZ instead if command below cannot run
+        # if running old inxi consider sudo inxi -c 0 -FxxxZ instead if command below cannot run
         run: sudo inxi -c 0 -FaZ
       - name: Print environment variables (printenv)
         run: printenv

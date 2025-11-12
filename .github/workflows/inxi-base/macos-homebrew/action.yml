@@ -1,0 +1,8 @@
+name: 'Setup Inxi Mac OS (Homebrew)'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install inxi
+      shell: bash
+      run: brew update && brew install inxi
