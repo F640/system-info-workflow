@@ -31,16 +31,17 @@ runs:
         fileName: ${{ env.DOWNLOAD_FILENAME }}
         tarBall: false
         zipBall: false
-        out-file-path: '%temp%\fastfetch'
+        out-file-path: '${{ runner.temp }}\fastfetch'
 
     - name: Extract Fastfetch
       shell: cmd
       run: |
+          echo ${{ runner.temp }}
           echo %temp%
           echo %DOWNLOAD_FILENAME%
-          cd %temp%\fastfetch
+          cd ${{ runner.temp }}\fastfetch
           7z.exe -o%GITHUB_WORKSPACE%\fastfetch x %DOWNLOAD_FILENAME%
 
     - name: Remove unused files
       shell: cmd
-      run: rmdir /S /Q %temp%\fastfetch
+      run: rmdir /S /Q ${{ runner.temp }}\fastfetch
