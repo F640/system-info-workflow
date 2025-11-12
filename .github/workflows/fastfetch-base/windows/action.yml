@@ -42,5 +42,5 @@ runs:
           cd ${{ env.FOLDER_NAME }}
 
     - name: Remove unused files
-      shell: bash
+      shell: cmd
       run: del %temp%/fastfetch
