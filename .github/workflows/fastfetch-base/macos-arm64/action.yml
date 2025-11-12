@@ -25,7 +25,7 @@ runs:
         sudo tar -xzvf fastfetch-macos-aarch64.tar.gz
 
         cd fastfetch-macos-aarch64
-        sdo chmod -R 555 usr
+        sudo chmod -R 555 usr
         sudo cp -r usr/* /usr/
   - name: Remove unused files
     shell: bash
