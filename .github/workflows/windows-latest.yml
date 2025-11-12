@@ -20,7 +20,7 @@ jobs:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
       - name: Run Fastfetch
         shell: cmd
-        run: '%cd%/fastfetch/fastfetch.exe -c all'
+        run: '%cd%\fastfetch\fastfetch.exe -c all'
       - name: Run systeminfo
         shell: cmd
         run: |

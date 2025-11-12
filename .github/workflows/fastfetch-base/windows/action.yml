@@ -31,13 +31,12 @@ runs:
         fileName: ${{ env.DOWNLOAD_FILENAME }}
         tarBall: false
         zipBall: false
-        out-file-path: '%temp%/fastfetch'
+        out-file-path: '%temp%\fastfetch'
 
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          mkdir fastfetch
-          7z.exe -ofastfetch e %temp%\fastfetch\${{ env.DOWNLOAD_FILENAME }}
+          7z.exe -ofastfetch x %temp%\fastfetch\${{ env.DOWNLOAD_FILENAME }}
 
           cd ${{ env.FOLDER_NAME }}
 
