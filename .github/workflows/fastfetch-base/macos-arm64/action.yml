@@ -27,6 +27,7 @@ runs:
         cd fastfetch-macos-aarch64
         sudo chmod -R 555 usr
         sudo cp -r usr/bin/* /usr/local/bin/
+        sudo cp -r usr/share/* /usr/local/share/
   - name: Remove unused files
     shell: bash
     run: sudo rm -rf /tmp/fastfetch
