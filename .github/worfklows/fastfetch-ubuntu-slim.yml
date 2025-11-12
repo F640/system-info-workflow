@@ -1,8 +1,10 @@
+name: Fastfetch Ubuntu Slim
 on:
   workflow_dispatch
 
-job:
-  uses: ubuntu-slim
+jobs:
+  download-and-run:
+    runs-on: ubuntu-slim
     steps:
       - name: composite
         uses: ./.github/workflows/fastfetch-base/ubuntu-x86_64
