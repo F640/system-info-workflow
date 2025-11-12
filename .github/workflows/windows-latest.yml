@@ -1,4 +1,4 @@
-name: Fastfetch Mac OS Latest
+name: Fastfetch Windows Latest
 on:
   workflow_dispatch:
     inputs:
