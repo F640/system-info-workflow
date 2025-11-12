@@ -36,7 +36,7 @@ runs:
     - name: Extract Fastfetch
       shell: pwsh
       run: |
-          7z.exe -o$github:workspace\fastfetch x $runner:temp\fastfetch\$env:DOWNLOAD_FILENAME
+          7z.exe -o$GITHUB_WORKSPACE\fastfetch x $RUNNER_TEMP\fastfetch\$DOWNLOAD_FILENAME
 
     - name: Remove unused files
       shell: cmd
