@@ -1,4 +1,4 @@
-name: Setup Fastfetch Ubuntu x86_64
+name: Setup Fastfetch MacOS x86_64
 
 inputs:
   use-prerelease:  # id of input
@@ -14,15 +14,19 @@ runs:
       repository: 'fastfetch-cli/fastfetch'
       latest: true
       preRelease: ${{ github.event.inputs.use-prerelease }}
-      fileName: 'fastfetch-linux-amd64.deb'
+      fileName: 'fastfetch-macos-amd64.tar.gz'
       tarBall: false
       zipBall: false
       out-file-path: '/tmp/fastfetch'
-  - name: Install Fastfetch x86_64
+  - name: Extract Fastfetch x86_64
     shell: bash
-    env:
-      DEBIAN_FRONTEND: noninteractive
-    run: sudo dpkg -i /tmp/fastfetch/fastfetch-linux-amd64.deb
+    run: |
+        cd /tmp/fastfetch
+        sudo tar -xzvf fastfetch-macos-amd64.tar.gz
+
+        cd fastfetch-macos-amd64
+        sdo chmod -R 555 usr
+        sudo cp -r usr/* /usr/
   - name: Remove unused files
     shell: bash
-    run: rm -rf /tmp/fastfetch
+    run: sudo rm -rf /tmp/fastfetch
