@@ -36,11 +36,11 @@ runs:
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          mkdir %temp%/fastfetch
+          mkdir %temp%\fastfetch
           7z.exe -o fastfetch %temp/fastfetch/${{ env.DOWNLOAD_FILENAME }}
 
           cd ${{ env.FOLDER_NAME }}
 
     - name: Remove unused files
       shell: cmd
-      run: del %temp%/fastfetch
+      run: del /F /Q %temp%\fastfetch
