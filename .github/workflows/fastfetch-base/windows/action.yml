@@ -1,5 +1,5 @@
 name: 'Setup Fastfetch Windows'
-# NOTE: ENVIRONMENT VARIABLES ARE NOT WORKING FOR SOME REASON
+# NOTE: Environment variables are not working for some reason, so that's why there are 2 different version of same OS
 
 inputs:
   use-prerelease:
