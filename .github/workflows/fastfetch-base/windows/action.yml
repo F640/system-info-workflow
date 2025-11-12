@@ -44,4 +44,4 @@ runs:
 
     - name: Remove unused files
       shell: bash
-     run: del %temp%/fastfetch
+      run: del %temp%/fastfetch
