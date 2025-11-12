@@ -34,11 +34,10 @@ runs:
         out-file-path: '${{ runner.temp }}\fastfetch'
 
     - name: Extract Fastfetch
-      shell: cmd
+      shell: pwsh
       run: |
-          cd %temp%\fastfetch
-          7z.exe -o%GITHUB_WORKSPACE%\fastfetch x ${{ env.DOWNLOAD_FILENAME }}
+          7z.exe -o$github:workspace\fastfetch x $runner:temp\fastfetch\$env:DOWNLOAD_FILENAME
 
     - name: Remove unused files
       shell: cmd
-      run: rmdir /S /Q %temp%\fastfetch
+      run: rmdir /S /Q %RUNNER_TEMP%\fastfetch
