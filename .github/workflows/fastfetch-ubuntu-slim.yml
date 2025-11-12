@@ -12,6 +12,8 @@ jobs:
     name: setup and run
     runs-on: ubuntu-slim
     steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
       - name: Setup Fastfetch
         uses: ./.github/workflows/fastfetch-base/ubuntu-x86_64
         with:
