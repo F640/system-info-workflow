@@ -17,12 +17,12 @@ runs:
         fileName: fastfetch-windows-amd64.7z
         tarBall: false
         zipBall: false
-        out-file-path: '%TEMP%\fastfetch'
+        out-file-path: '%USERPROFILE%\AppData\Local\Temp\fastfetch'
 
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          7z.exe -ofastfetch x "%TEMP%\fastfetch\fastfetch-windows-amd64.7z"
+          7z.exe -ofastfetch x "%USERPROFILE%\AppData\Local\Temp\fastfetch\fastfetch-windows-amd64.7z"
 
     - name: Remove unused files
       shell: cmd
