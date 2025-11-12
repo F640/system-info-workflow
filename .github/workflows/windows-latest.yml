@@ -23,13 +23,7 @@ jobs:
         run: '%cd%\fastfetch\fastfetch.exe -c all'
       - name: Run systeminfo
         shell: cmd
-        run: |
-          if not "%1"=="am_admin" (
-              powershell -Command "Start-Process -Verb RunAs -FilePath '%0' -ArgumentList 'am_admin'"
-              exit /b
-          )
-          systeminfo
+        run: systeminfo
       - name: Run Get-ComputerInfo
-        shell: powershell
-        run: |
-          Start-Process powershell -Verb runAs "Get-ComputerInfo"
+        shell: pwsh
+        run: Start-Process powershell -Verb runAs "Get-ComputerInfo"
