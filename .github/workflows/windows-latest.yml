@@ -1,4 +1,4 @@
-name:  Windows-latest system information
+name:  Windows latest system information
 on:
   workflow_dispatch:
     inputs:
