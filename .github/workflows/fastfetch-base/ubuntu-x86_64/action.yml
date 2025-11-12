@@ -17,12 +17,12 @@ runs:
       fileName: 'fastfetch-linux-amd64.deb'
       tarBall: false
       zipBall: false
-      out-file-path: '/tmp/fastfetch.deb'
+      out-file-path: '/tmp/fastfetch'
   - name: Install Fastfetch x86_64
     shell: bash
     env:
       DEBIAN_FRONTEND: noninteractive
-    run: sudo dpkg -i /tmp/fastfetch.deb
+    run: sudo dpkg -i /tmp/fastfetch/fastfetch-linux-amd64.deb
   - name: Remove unused files
     shell: bash
-    run: rm -f /tmp/dastfetch.deb
+    run: rm -rf /tmp/fastfetch
