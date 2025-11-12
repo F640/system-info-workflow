@@ -36,9 +36,7 @@ runs:
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          7z.exe -ofastfetch x %temp%\fastfetch\${{ env.DOWNLOAD_FILENAME }}
-
-          cd ${{ env.FOLDER_NAME }}
+          7z.exe -ofastfetch x %temp%\fastfetch\%{{ env.DOWNLOAD_FILENAME }}%
 
     - name: Remove unused files
       shell: cmd
