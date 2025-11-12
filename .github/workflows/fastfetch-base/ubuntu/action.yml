@@ -1,0 +1,46 @@
+name: 'Setup Fastfetch Ubuntu'
+
+inputs:
+  use-prerelease:
+    description: 'Use pre-release versions of Fastfetch'
+    default: false
+    type: boolean
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set correct fastfetch package name arch
+      shell: bash
+      run: |
+        ARCH=$(dpkg --print-architecture)
+        if [ "$ARCH" = "amd64" ]; then
+          echo "DOWNLOAD_FILENAME=fastfetch-linux-amd64.deb" >> $GITHUB_ENV
+        elif [ "$ARCH" = "arm64" ]; then
+          echo "DOWNLOAD_FILENAME=fastfetch-linux-aarch64.deb" >> $GITHUB_ENV
+        else
+          echo "Unknown CPU architecture: $ARCH"
+          exit 1
+        fi
+
+    - name: Download Fastfetch release
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: 'fastfetch-cli/fastfetch'
+        latest: true
+        preRelease: ${{ inputs.use-prerelease }}
+        fileName: ${{ env.DOWNLOAD_FILENAME }}
+        tarBall: false
+        zipBall: false
+        out-file-path: '/tmp/fastfetch'
+
+    # Step 3: Install the downloaded .deb package
+    - name: Install Fastfetch
+      shell: bash
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: sudo dpkg -i /tmp/fastfetch/${{ env.DOWNLOAD_FILENAME }}
+
+    # Step 4: Clean up the downloaded files
+    - name: Remove unused files
+      shell: bash
+      run: rm -rf /tmp/fastfetch
