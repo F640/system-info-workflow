@@ -12,17 +12,16 @@ runs:
     - name: Set correct fastfetch package name arch
       shell: cmd
       run: |
-        ARCH=$(uname -m)
-        if [ "$ARCH" = "x86_64" ]; then
-          echo "DOWNLOAD_FILENAME=fastfetch-windows-amd64.7z" >> %GITHUB_ENV%
-          echo "FOLDER_NAME=fastfetch-windows-amd64" >> %GITHUB_ENV%
-        elif [ "$ARCH" = "arm64" ]; then
-          echo "DOWNLOAD_FILENAME=fastfetch-windows-aarch64.7z" >> %GITHUB_ENV%
-          echo "FOLDER_NAME=fastfetch-windows-aarch64" >> %GITHUB_ENV%
-        else
-          echo "Unknown CPU architecture: $ARCH"
-          exit 1
-        fi
+          IF /I "%PROCESSOR_ARCHITECTURE%" == "AMD64" (
+            echo "DOWNLOAD_FILENAME=fastfetch-windows-amd64.7z" >> %GITHUB_ENV%
+            echo "FOLDER_NAME=fastfetch-windows-amd64" >> %GITHUB_ENV%
+          ) ELSE IF /I "%PROCESSOR_ARCHITECTURE%" == "ARM64" (
+            echo "DOWNLOAD_FILENAME=fastfetch-windows-aarch64.7z" >> %GITHUB_ENV%
+            echo "FOLDER_NAME=fastfetch-windows-aarch64" >> %GITHUB_ENV%
+          ) ELSE (
+            echo Unknown CPU architecture: %PROCESSOR_ARCHITECTURE%
+            exit /b 1
+          )
 
     - uses: robinraju/release-downloader@v1
       with:
