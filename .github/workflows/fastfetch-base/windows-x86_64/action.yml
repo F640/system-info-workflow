@@ -17,7 +17,7 @@ runs:
         fileName: fastfetch-windows-amd64.7z
         tarBall: false
         zipBall: false
-        out-file-path: '%USERPROFILE%\AppData\Local\Temp\fastfetch'
+        out-file-path: 'C:\User\runneradmin\AppData\Local\Temp\fastfetch'
 
     - name: Extract Fastfetch
       shell: cmd
