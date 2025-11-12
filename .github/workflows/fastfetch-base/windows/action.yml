@@ -36,8 +36,8 @@ runs:
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          mkdir %temp%\fastfetch
-          7z.exe -ofastfetch e %temp/fastfetch/${{ env.DOWNLOAD_FILENAME }}
+          mkdir fastfetch
+          7z.exe -ofastfetch e %temp%\fastfetch\${{ env.DOWNLOAD_FILENAME }}
 
           cd ${{ env.FOLDER_NAME }}
 
