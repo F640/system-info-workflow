@@ -1,4 +1,5 @@
 name: 'Setup Fastfetch Windows'
+# NOTE: ENVIRONMENT VARIABLES ARE NOT WORKING FOR SOME REASON
 
 inputs:
   use-prerelease:

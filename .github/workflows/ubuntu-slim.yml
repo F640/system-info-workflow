@@ -1,4 +1,4 @@
-name: Fastfetch Mac OS Latest
+name: Ubuntu Slim system information
 on:
   workflow_dispatch:
     inputs:
@@ -10,12 +10,12 @@ on:
 jobs:
   download-and-run:
     name: setup and run
-    runs-on: macos-latest
+    runs-on: ubuntu-slim
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
       - name: Setup Fastfetch
-        uses: ./.github/workflows/fastfetch-base/macos
+        uses: ./.github/workflows/fastfetch-base/ubuntu
         with:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
       - name: Run Fastfetch

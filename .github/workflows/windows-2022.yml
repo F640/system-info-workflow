@@ -1,4 +1,4 @@
-name: Fastfetch Ubuntu 22
+name:  Windows Server 2022 system information
 on:
   workflow_dispatch:
     inputs:
@@ -10,13 +10,20 @@ on:
 jobs:
   download-and-run:
     name: setup and run
-    runs-on: ubuntu-22.04
+    runs-on: windows-latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
       - name: Setup Fastfetch
-        uses: ./.github/workflows/fastfetch-base/ubuntu
+        uses: ./.github/workflows/fastfetch-base/windows-x86_64
         with:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
       - name: Run Fastfetch
-        run: fastfetch -c all
+        shell: cmd
+        run: '%cd%\fastfetch\fastfetch.exe -c all'
+      - name: Run systeminfo
+        shell: cmd
+        run: systeminfo
+      - name: Run Get-ComputerInfo
+        shell: pwsh
+        run: Get-ComputerInfo

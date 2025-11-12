@@ -1,4 +1,4 @@
-name: Fastfetch Mac OS 14 arm64
+name: Mac OS 14 arm64 system information
 on:
   workflow_dispatch:
     inputs:

@@ -1,4 +1,4 @@
-name: Fastfetch Mac OS 13 Intel
+name: Mac OS 26 arm64 system information
 on:
   workflow_dispatch:
     inputs:
@@ -10,12 +10,12 @@ on:
 jobs:
   download-and-run:
     name: setup and run
-    runs-on: macos-13
+    runs-on: macos-26
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
       - name: Setup Fastfetch
-        uses: ./.github/workflows/fastfetch-base/macos-arm64
+        uses: ./.github/workflows/fastfetch-base/macos
         with:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
       - name: Run Fastfetch

@@ -1,4 +1,4 @@
-name: Fastfetch Mac OS 15 arm64
+name: Ubuntu latest system information
 on:
   workflow_dispatch:
     inputs:
@@ -7,15 +7,18 @@ on:
         type: 'boolean'
         required: false
 
+env:
+  TERM: 'vt100'
+
 jobs:
   download-and-run:
     name: setup and run
-    runs-on: macos-15
+    runs-on: ubuntu-latest
     steps:
       - name: checkout repo
         uses: actions/checkout@v4
       - name: Setup Fastfetch
-        uses: ./.github/workflows/fastfetch-base/macos-arm64
+        uses: ./.github/workflows/fastfetch-base/ubuntu
         with:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
       - name: Run Fastfetch

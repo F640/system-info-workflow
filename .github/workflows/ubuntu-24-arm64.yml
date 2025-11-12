@@ -1,4 +1,4 @@
-name: Fastfetch Ubuntu Latest
+name: Ubuntu 24 arm64 system information
 on:
   workflow_dispatch:
     inputs:
@@ -10,7 +10,7 @@ on:
 jobs:
   download-and-run:
     name: setup and run
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     steps:
       - name: checkout repo
         uses: actions/checkout@v4

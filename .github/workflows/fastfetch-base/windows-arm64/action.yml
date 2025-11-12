@@ -1,0 +1,29 @@
+name: 'Setup Fastfetch Windows arm64'
+
+inputs:
+  use-prerelease:
+    description: 'Use pre-release'
+    default: false
+    type: boolean
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: robinraju/release-downloader@v1
+      with:
+        repository: 'fastfetch-cli/fastfetch'
+        latest: true
+        preRelease: ${{ github.event.inputs.use-prerelease }}
+        fileName: fastfetch-windows-aarch64.7z
+        tarBall: false
+        zipBall: false
+        out-file-path: 'C:\Users\runneradmin\AppData\Local\Temp\fastfetch'
+
+    - name: Extract Fastfetch
+      shell: cmd
+      run: |
+          7z.exe -ofastfetch x "%USERPROFILE%\AppData\Local\Temp\fastfetch\fastfetch-windows-aarch64.7z"
+
+    - name: Remove unused files
+      shell: cmd
+      run: rmdir /S /Q "%TEMP%\fastfetch"
