@@ -23,7 +23,7 @@ jobs:
       - name: Run Fastfetch
         run: fastfetch -c all
       - name: Run Inxi (as root)
-        run: sudo inxi -F
+        run: sudo inxi -exxxZ
       - name: Print environment variables (printenv)
         run: printenv
       - name: Print environment variables (set)
