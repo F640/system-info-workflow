@@ -34,7 +34,7 @@ runs:
         repository: 'fastfetch-cli/fastfetch'
         latest: true
         preRelease: ${{ github.event.inputs.use-prerelease }}
-        fileName: $env:DOWNLOAD_FILENAME
+        fileName: ${{ env.DOWNLOAD_FILENAME }}
         tarBall: false
         zipBall: false
         out-file-path: '$TEMP\fastfetch'

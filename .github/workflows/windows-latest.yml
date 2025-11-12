@@ -15,7 +15,7 @@ jobs:
       - name: checkout repo
         uses: actions/checkout@v4
       - name: Setup Fastfetch
-        uses: ./.github/workflows/fastfetch-base/windows
+        uses: ./.github/workflows/fastfetch-base/windows-x86_64
         with:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
       - name: Run Fastfetch
