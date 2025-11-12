@@ -1,0 +1,35 @@
+name: Fastfetch Mac OS Latest
+on:
+  workflow_dispatch:
+    inputs:
+      use-prerelease:
+        default: false
+        type: 'boolean'
+        required: false
+
+jobs:
+  download-and-run:
+    name: setup and run
+    runs-on: windows-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: Setup Fastfetch
+        uses: ./.github/workflows/fastfetch-base/windows
+        with:
+          use-prerelease: ${{ github.event.inputs.use-prerelease }}
+      - name: Run Fastfetch
+        shell: cmd
+        run: '%cd%/fastfetch/fastfetch.exe -c all'
+      - name: Run systeminfo
+        shell: cmd
+        run: |
+          if not "%1"=="am_admin" (
+              powershell -Command "Start-Process -Verb RunAs -FilePath '%0' -ArgumentList 'am_admin'"
+              exit /b
+          )
+          systeminfo
+      - name: Run Get-ComputerInfo
+        shell: powershell
+        run: |
+          Start-Process powershell -Verb runAs "Get-ComputerInfo"

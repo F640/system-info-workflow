@@ -1,0 +1,46 @@
+name: 'Setup Fastfetch Windows'
+
+inputs:
+  use-prerelease:
+    description: 'Use pre-release'
+    default: false
+    type: boolean
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Set correct fastfetch package name arch
+      shell: cmd
+      run: |
+        ARCH=$(uname -m)
+        if [ "$ARCH" = "x86_64" ]; then
+          echo "DOWNLOAD_FILENAME=fastfetch-windows-amd64.7z" >> %GITHUB_ENV%
+          echo "FOLDER_NAME=fastfetch-windows-amd64" >> %GITHUB_ENV%
+        elif [ "$ARCH" = "arm64" ]; then
+          echo "DOWNLOAD_FILENAME=fastfetch-windows-aarch64.7z" >> %GITHUB_ENV%
+          echo "FOLDER_NAME=fastfetch-windows-aarch64" >> %GITHUB_ENV%
+        else
+          echo "Unknown CPU architecture: $ARCH"
+          exit 1
+        fi
+
+  - uses: robinraju/release-downloader@v1
+    with:
+      repository: 'fastfetch-cli/fastfetch'
+      latest: true
+      preRelease: ${{ github.event.inputs.use-prerelease }}
+      fileName: ${{ env.DOWNLOAD_FILENAME }}
+      tarBall: false
+      zipBall: false
+      out-file-path: '%temp%/fastfetch'
+
+  - name: Extract Fastfetch
+    shell: cmd
+    run: |
+        mkdir %temp%/fastfetch
+        7z.exe -o fastfetch %temp/fastfetch/${{ env.DOWNLOAD_FILENAME }}
+
+        cd ${{ env.FOLDER_NAME }}
+  - name: Remove unused files
+    shell: bash
+    run: del %temp%/fastfetch
