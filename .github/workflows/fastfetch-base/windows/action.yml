@@ -23,11 +23,11 @@ runs:
             exit /b 1
           )
 
-
     - name: Fix temp folder variable # They broke this somehow, https://github.com/actions/runner-images/issues/712#issuecomment-613004302
+      shell: cmd
       run: |
-          echo "::set-env name=TMP::$env:USERPROFILE\AppData\Local\Temp"
-          echo "::set-env name=TEMP::$env:USERPROFILE\AppData\Local\Temp"
+          echo "TEMP=%USERPROFILE%\AppData\Local\Temp" >> $env:GITHUB_ENV
+          echo "TMP=%USERPROFILE%\AppData\Local\Temp" >> $env:GITHUB_ENV
 
     - uses: robinraju/release-downloader@v1
       with:
