@@ -7,9 +7,6 @@ on:
         type: 'boolean'
         required: false
 
-env:
-  TERM: 'vt100'
-
 jobs:
   download-and-run:
     name: setup and run
