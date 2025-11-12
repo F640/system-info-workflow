@@ -13,28 +13,28 @@ runs:
       shell: cmd
       run: |
           IF /I "%PROCESSOR_ARCHITECTURE%" == "AMD64" (
-            echo "DOWNLOAD_FILENAME=fastfetch-windows-amd64.7z" >> %GITHUB_ENV%
+            echo "DL_NAME=fastfetch-windows-amd64.7z" >> %GITHUB_ENV%
             echo "FOLDER_NAME=fastfetch-windows-amd64" >> %GITHUB_ENV%
           ) ELSE IF /I "%PROCESSOR_ARCHITECTURE%" == "ARM64" (
-            echo "DOWNLOAD_FILENAME=fastfetch-windows-aarch64.7z" >> %GITHUB_ENV%
+            echo "DL_NAME=fastfetch-windows-aarch64.7z" >> %GITHUB_ENV%
             echo "FOLDER_NAME=fastfetch-windows-aarch64" >> %GITHUB_ENV%
           ) ELSE (
             echo Unknown CPU architecture: %PROCESSOR_ARCHITECTURE%
             exit /b 1
           )
 
-    - name: Fix temp folder variable # They broke this somehow, https://github.com/actions/runner-images/issues/712#issuecomment-613004302
-      shell: cmd
-      run: |
-          echo "TEMP=%USERPROFILE%\AppData\Local\Temp" >> %GITHUB_ENV%
-          echo "TMP=%USERPROFILE%\AppData\Local\Temp" >> %GITHUB_ENV%
+    # - name: Fix temp folder variable # They broke this somehow, https://github.com/actions/runner-images/issues/712#issuecomment-613004302
+    #   shell: cmd
+    #   run: |
+    #       echo "TEMP=%USERPROFILE%\AppData\Local\Temp" >> %GITHUB_ENV%
+    #       echo "TMP=%USERPROFILE%\AppData\Local\Temp" >> %GITHUB_ENV%
 
     - uses: robinraju/release-downloader@v1
       with:
         repository: 'fastfetch-cli/fastfetch'
         latest: true
         preRelease: ${{ github.event.inputs.use-prerelease }}
-        fileName: ${{ env.DOWNLOAD_FILENAME }}
+        fileName: ${{ env.DL_NAME }}
         tarBall: false
         zipBall: false
         out-file-path: '$TEMP\fastfetch'
@@ -42,7 +42,9 @@ runs:
     - name: Extract Fastfetch
       shell: cmd
       run: |
-          7z.exe -o"%GITHUB_WORKSPACE%\fastfetch" x "%TEMP%\fastfetch\%DOWNLOAD_FILENAME%"
+          echo %DL_NAME%
+          echo %FOLDER_NAME%
+          7z.exe -o"%GITHUB_WORKSPACE%\fastfetch" x "%TEMP%\fastfetch\%DL_NAME%"
 
     - name: Remove unused files
       shell: cmd
