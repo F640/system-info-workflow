@@ -36,8 +36,10 @@ runs:
     - name: Extract Fastfetch
       shell: cmd
       run: |
+          echo %temp%
+          echo %DOWNLOAD_FILENAME%
           cd %temp%\fastfetch
-          7z.exe -o%GITHUB_WORKSPACE%fastfetch x %DOWNLOAD_FILENAME%
+          7z.exe -o%GITHUB_WORKSPACE%\fastfetch x %DOWNLOAD_FILENAME%
 
     - name: Remove unused files
       shell: cmd
