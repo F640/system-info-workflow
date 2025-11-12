@@ -8,19 +8,19 @@ inputs:
 
 runs:
   using: 'composite'
-    steps:
-    - uses: robinraju/release-downloader@v1
-      with:
-        repository: 'fastfetch-cli/fastfetch'
-        latest: true
-        preRelease: ${{ github.event.inputs.use-prerelease }}
-        fileName: 'fastfetch-linux-amd64.deb'
-        tarBall: false
-        zipBall: false
-        out-file-path: '/tmp/fastfetch.deb'
-    - name: Install Fastfetch x86_64
-      env:
-        DEBIAN_FRONTEND: noninteractive
-      run: sudo dpkg -i /tmp/fastfetch.deb
-    - name: Remove unused files
-      run: rm -f /tmp/dastfetch.deb
+  steps:
+  - uses: robinraju/release-downloader@v1
+    with:
+      repository: 'fastfetch-cli/fastfetch'
+      latest: true
+      preRelease: ${{ github.event.inputs.use-prerelease }}
+      fileName: 'fastfetch-linux-amd64.deb'
+      tarBall: false
+      zipBall: false
+      out-file-path: '/tmp/fastfetch.deb'
+  - name: Install Fastfetch x86_64
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    run: sudo dpkg -i /tmp/fastfetch.deb
+  - name: Remove unused files
+    run: rm -f /tmp/dastfetch.deb
