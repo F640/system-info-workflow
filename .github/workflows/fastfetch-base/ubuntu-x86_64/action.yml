@@ -19,8 +19,10 @@ runs:
       zipBall: false
       out-file-path: '/tmp/fastfetch.deb'
   - name: Install Fastfetch x86_64
+    shell: bash
     env:
       DEBIAN_FRONTEND: noninteractive
     run: sudo dpkg -i /tmp/fastfetch.deb
   - name: Remove unused files
+    shell: bash
     run: rm -f /tmp/dastfetch.deb
