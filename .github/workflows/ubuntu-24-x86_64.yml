@@ -18,5 +18,16 @@ jobs:
         uses: ./.github/workflows/fastfetch-base/ubuntu
         with:
           use-prerelease: ${{ github.event.inputs.use-prerelease }}
+      - name: Setup Inxi
+        uses: ./.github/workflows/inxi-base/ubuntu
       - name: Run Fastfetch
         run: fastfetch -c all
+      - name: Run Inxi (as root)
+        # if running old ubuntu consider sudo inxi -c 0 -FxxxZ instead if command below cannot run
+        run: sudo inxi -c 0 -FaZ
+      - name: Print environment variables (printenv)
+        run: printenv
+      - name: Print environment variables (set)
+        run: set
+      - name: Print environment variables (export)
+        run: export
