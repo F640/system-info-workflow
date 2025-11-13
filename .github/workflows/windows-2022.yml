@@ -27,3 +27,9 @@ jobs:
       - name: Run Get-ComputerInfo
         shell: pwsh
         run: Get-ComputerInfo
+      - name: Print environment variables (Command Prompt)
+        shell: cmd
+        run: set
+      - name: Print environment variables (Powershell)
+        shell: pwsh
+        run: 'Get-ChildItem Env:'
