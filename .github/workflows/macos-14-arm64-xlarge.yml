@@ -1,0 +1,33 @@
+name: Mac OS 14 arm64 extra large system information
+on:
+  workflow_dispatch:
+    inputs:
+      use-prerelease:
+        default: false
+        type: 'boolean'
+        required: false
+
+jobs:
+  download-and-run:
+    name: setup and run
+    runs-on: macos-14-xlarge
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: Setup Fastfetch
+        uses: ./.github/workflows/fastfetch-base/macos
+        with:
+          use-prerelease: ${{ github.event.inputs.use-prerelease }}
+      - name: Setup Inxi
+        uses: ./.github/workflows/inxi-base/macos-homebrew
+      - name: Run Fastfetch
+        run: fastfetch -c all
+      - name: Run Inxi (as root)
+        # if running old inxi consider sudo inxi -c 0 -FxxxZ instead if command below cannot run
+        run: sudo inxi -c 0 -FaZ
+      - name: Print environment variables (printenv)
+        run: printenv
+      - name: Print environment variables (set)
+        run: set
+      - name: Print environment variables (export)
+        run: export

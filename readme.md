@@ -13,3 +13,5 @@ If you are ever wondering about GitHub Runner specification, this repo will prov
 If you need to see the information you can take a look at actions then view my recent runs. If i have not run it in a while and you are in need of latest information feel free to fork it then run the workflow script on your own.
 
 If you are having any issues running my script feel free to open an issue or if you have made some improvement to my workslow script feel free to open a PR.
+
+Runner images ref: https://github.com/actions/runner-images
