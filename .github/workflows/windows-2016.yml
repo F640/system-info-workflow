@@ -1,0 +1,35 @@
+name:  Windows Server 2016 system information
+on:
+  workflow_dispatch:
+    inputs:
+      use-prerelease:
+        default: false
+        type: 'boolean'
+        required: false
+
+jobs:
+  download-and-run:
+    name: setup and run
+    runs-on: windows-2016
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: Setup Fastfetch
+        uses: ./.github/workflows/fastfetch-base/windows-x86_64
+        with:
+          use-prerelease: ${{ github.event.inputs.use-prerelease }}
+      - name: Run Fastfetch
+        shell: cmd
+        run: '%cd%\fastfetch\fastfetch.exe -c all'
+      - name: Run systeminfo
+        shell: cmd
+        run: systeminfo
+      - name: Run Get-ComputerInfo
+        shell: pwsh
+        run: Get-ComputerInfo
+      - name: Print environment variables (Command Prompt)
+        shell: cmd
+        run: set
+      - name: Print environment variables (Powershell)
+        shell: pwsh
+        run: 'Get-ChildItem Env:'
