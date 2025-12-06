@@ -2,7 +2,8 @@ name: Mac OS X 10.14 system information
 on:
   workflow_dispatch:
     inputs:
-      use-prerelease:
+      fastfetch-use-prerelease:
+        description: 'Fastfetch: Use pre-release version'
         default: false
         type: 'boolean'
         required: false
@@ -17,7 +18,7 @@ jobs:
       - name: Setup Fastfetch
         uses: ./.github/workflows/fastfetch-base/macos
         with:
-          use-prerelease: ${{ github.event.inputs.use-prerelease }}
+          use-prerelease: ${{ github.event.inputs.fastfetch-use-prerelease }}
       - name: Setup Inxi
         uses: ./.github/workflows/inxi-base/macos-homebrew
       - name: Run Fastfetch
