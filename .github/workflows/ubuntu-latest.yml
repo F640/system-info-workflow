@@ -25,6 +25,8 @@ jobs:
       - name: Run Inxi (as root)
         # if running old inxi consider sudo inxi -c 0 -FxxxZ instead if command below cannot run
         run: sudo inxi -c 0 -FaZ
+      - name: Get network information (ifconfig)
+        uses: ./.github/workflows/ifconfig-base/show-detailed-ifs
       - name: Print environment variables (printenv)
         run: printenv
       - name: Print environment variables (set)

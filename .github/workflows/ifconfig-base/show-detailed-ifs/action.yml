@@ -1,0 +1,8 @@
+name: 'Show Detailed Interfaces in ifconfig'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Run command
+      shell: bash
+      run: ifconfig -a
