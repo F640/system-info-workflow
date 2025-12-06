@@ -21,6 +21,9 @@ jobs:
       - name: Run Fastfetch
         shell: cmd
         run: '%cd%\fastfetch\fastfetch.exe -c all'
+      - name: Get Current Full Windows Version
+        shell: cmd
+        run: ver
       - name: Run systeminfo
         shell: cmd
         run: systeminfo
@@ -33,3 +36,9 @@ jobs:
       - name: Print environment variables (Powershell)
         shell: pwsh
         run: 'Get-ChildItem Env:'
+      - name: Get network interfaces (ipconfig)
+        shell: cmd
+        run: ipconfig /all
+      - name: Show running processes (tasklist)
+        shell: cmd
+        run: tasklist
