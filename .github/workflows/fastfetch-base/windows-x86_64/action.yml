@@ -13,7 +13,7 @@ runs:
       with:
         repository: 'fastfetch-cli/fastfetch'
         latest: true
-        preRelease: ${{ github.event.inputs.use-prerelease }}
+        preRelease: ${{ inputs.use-prerelease }}
         fileName: fastfetch-windows-amd64.7z
         tarBall: false
         zipBall: false
